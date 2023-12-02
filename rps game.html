@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper scissor</title>
+    <style>
+        .card{
+            border: 2px solid gold;
+            position: relative;
+            left: 50%;
+            top: 50px;
+            width: 230px;
+            transform:translate(-50%, 0%);
+            padding: 20px;
+            font-family: sans-serif;
+            height: 290px;
+            box-shadow: 5px 3px gray;
+        }
+        .out{
+            display: flex;
+            gap: 30px;
+            margin-left: 30px;
+        }
+        .input{
+            display: flex;
+            gap: 20px;
+        }
+        img{
+            height: 80px;
+        }
+        #u{
+            rotate: 90deg;
+        }
+        #c{
+            rotate: -90deg;
+        }
+        #u2{
+            padding-top: 10px;
+        }
+        .text{
+            text-align: center;
+            font-size: x-large;
+            font-weight: bolder;
+            color: goldenrod;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .replay button{
+            margin-left: 90px;
+            background-color: goldenrod;
+            border: 2px solid;
+            margin-top: 20px;
+            font-weight: bolder;
+        }
+        .replay button:hover{
+            font-size: 15px;
+            border: 4px double;
+            margin-bottom: 10px;
+        }
+        .hov:hover{
+            border: 2px solid gold;
+            height: 90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="out">
+            <div class="userout">
+                <img src="C:\Users\KIIT\Pictures\Screenshots\stone img.png" alt="user" id="u">
+            </div>
+            <div class="cpuout">
+                <img src="C:\Users\KIIT\Pictures\Screenshots\stone img.png" alt="cpu" id="c">
+            </div>
+        </div>
+        <div class="text">Select any one to start</div>
+        <div class="input">
+            <div class="rock">
+                <img src="C:\Users\KIIT\Pictures\Screenshots\stone img.png" alt="stone" id="u1" onclick="getit1()" class="hov" >
+            </div>
+            <div class="paper">
+                <img src="C:\Users\KIIT\Pictures\Screenshots\Screenshot 2023-11-24 141117.png" alt="paper" id="u2" onclick="getit2()"  class="hov">
+            </div>
+            <div class="scissor">
+                <img src="C:\Users\KIIT\Pictures\Screenshots\scissor img.png" alt="scissor" id="u3" onclick="getit3()"  class="hov">
+            </div>
+        </div>
+        <div class="replay"><button onclick="resetGame()">Replay</button></div>
+    </div>
+
+    <script>
+       let x = [document.getElementById('u1'),
+  document.getElementById('u2'),
+  document.getElementById('u3')
+];
+let us = u.src;
+let cs = c.src;
+let r = -1;
+let user = -1;
+let cpu = -1;
+let t = document.getElementsByClassName('text')[0];
+let udiv = document.querySelector(".userout");
+let cdiv = document.querySelector(".cpuout");
+function result() {
+  if (user === cpu) {
+    t.textContent = "Draw";
+  } else if (user === 0 && cpu === 2) {
+    t.textContent = "User Wins";
+  } else if (user === 1 && cpu === 0) {
+    t.textContent = "User Wins";
+  } else if (user === 2 && cpu === 1) {
+    t.textContent = "User Wins";
+  } 
+  else if (user === 1 && cpu === 2) {
+    t.textContent = "Computer Wins";
+  } 
+  else if (user === 0 && cpu === 1) {
+    t.textContent = "Computer Wins";
+  } 
+  else if (user === 2 && cpu === 0) {
+    t.textContent = "Computer Wins";
+  } 
+}
+
+function change() {
+  r = Math.floor(Math.random() * 3);
+  c.src = x[r].src;
+  cpu = r;
+}
+
+function getit1() {
+  shake();
+  shake();
+  u.src = u1.src;
+  user = 0;
+  change();
+  result();
+}
+function shake(){
+  // Slide up
+  udiv.style.transform = 'translateY(-24px)'; // Move the div up 50px
+  cdiv.style.transform = 'translateY(-24px)';
+  setTimeout(() => {
+    // Slide down after 0.5 seconds
+    udiv.style.transform = 'translateY(0)';
+     // Move the div back to its original position
+     cdiv.style.transform = 'translateY(0)';
+  }, 500); // 0.5 seconds in milliseconds
+}
+function getit2() {
+  shake();
+  shake();
+  u.src = u2.src;
+  user = 1;
+  change();
+  result();
+}
+
+function getit3() {
+  shake();
+  shake();
+  u.src = u3.src;
+  user = 2;
+  change();
+  result();
+}
+
+function resetGame() {
+  u.src = us;
+  user = -1;
+  c.src = cs;
+  cpu = -1;
+  t.textContent = "Select any one to start";
+}
+        </script>
+</body>
+</html>
